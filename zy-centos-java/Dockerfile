@@ -4,7 +4,7 @@ MAINTAINER ellios <104082492@qq.com>
 
 # basic settings
 ENV TZ=Asia/Shanghai \
-    LANG=en_US.UTF-8 \
+    LANG=en_US.UTF-8 
 
 RUN ln -sf /usr/share/zoneinfo/${TZ} /etc/localtime
 
@@ -20,7 +20,7 @@ RUN yum -y install wget unzip net-tools sysstat lrzsz \
  && yum clean all
 
 # jdk
-ENV JAVA_DOWNLOAD_URL="http://download.oracle.com/otn-pub/java/jdk/8u172-b11/a58eab1ec242421181065cdc37240b08/jdk-8u172-linux-x64.rpm" \
+ENV JAVA_DOWNLOAD_URL="http://download.oracle.com/otn-pub/java/jdk/8u172-b11/a58eab1ec242421181065cdc37240b08/jdk-8u201-linux-x64.rpm" \
     JAVA_HOME=/usr/java/latest
 
 RUN wget -q --no-cookies --no-check-certificate --header "Cookie: oraclelicense=accept-securebackup-cookie" ${JAVA_DOWNLOAD_URL} -O /tmp/java.rpm \
