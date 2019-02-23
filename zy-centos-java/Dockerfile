@@ -1,4 +1,4 @@
-FROM centos:7.6
+FROM centos:7.6.1810
 
 MAINTAINER ellios <104082492@qq.com>
 
@@ -6,7 +6,7 @@ MAINTAINER ellios <104082492@qq.com>
 ENV TZ=Asia/Shanghai \
     LANG=en_US.UTF-8 
 
-RUN set -x && ln -sf /usr/share/zoneinfo/${TZ} /etc/localtime
+RUN ln -sf /usr/share/zoneinfo/${TZ} /etc/localtime
 
 # basic paths
 ENV TOP_HOME=/opt
@@ -19,13 +19,14 @@ RUN set -x && chmod a+x root && mkdir -p ${APP_HOME} ${WWW_ROOT}
 RUN set -x && yum -y install wget unzip net-tools sysstat lrzsz && yum clean all
 
 # jdk
-ENV JAVA_DOWNLOAD_URL="http://download.oracle.com/otn-pub/java/jdk/8u172-b11/a58eab1ec242421181065cdc37240b08/jdk-8u201-linux-x64.rpm" \
-    JAVA_HOME=/usr/java/latest
 
-RUN set -x \
- && wget -q --no-cookies --no-check-certificate --header "Cookie: oraclelicense=accept-securebackup-cookie" ${JAVA_DOWNLOAD_URL} -O /tmp/java.rpm \
+ENV JAVA_DOWNLOAD_URL="http://download.oracle.com/otn-pub/java/jdk/8u201-b09/42970487e3af4f5aa5bca3f542482c60/jdk-8u201-linux-x64.rpm" \
+ JAVA_HOME=/usr/java/latest
+
+RUN wget -q --no-cookies --no-check-certificate --header "Cookie: oraclelicense=accept-securebackup-cookie" ${JAVA_DOWNLOAD_URL} -O /tmp/java.rpm \
  && yum -y install /tmp/java.rpm \
- && yum clean all && rm -rf /tmp/*
+ && yum clean all \
+ && rm -rf /tmp/*
 
 # sshd
 RUN set -x \
