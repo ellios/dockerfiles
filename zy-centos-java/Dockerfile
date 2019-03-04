@@ -9,11 +9,10 @@ ENV TZ=Asia/Shanghai \
 RUN ln -sf /usr/share/zoneinfo/${TZ} /etc/localtime
 
 # basic paths
-ENV TOP_HOME=/opt
-ENV APP_HOME=${TOP_HOME}/app \
-    WWW_ROOT=${TOP_HOME}/www
+ENV TOP_HOME=/var/www
+ENV APP_HOME=${TOP_HOME}/app
 
-RUN set -x && chmod a+x root && mkdir -p ${APP_HOME} ${WWW_ROOT}
+RUN set -x && chmod a+x root && mkdir -p ${APP_HOME}
 
 # basic tools
 RUN set -x && yum -y install wget unzip net-tools sysstat lrzsz && yum clean all
