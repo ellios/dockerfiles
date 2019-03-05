@@ -10,9 +10,10 @@ RUN ln -sf /usr/share/zoneinfo/${TZ} /etc/localtime
 
 # basic paths
 ENV TOP_HOME=/var/www
-ENV APP_HOME=${TOP_HOME}/app
+ENV APP_HOME=${TOP_HOME}/app \
+    LOG_DIR=${TOP_HOME}/logs
 
-RUN set -x && chmod a+x root && mkdir -p ${APP_HOME}
+RUN set -x && chmod a+x root && mkdir -p ${APP_HOME} ${LOG_DIR}
 
 # basic tools
 RUN set -x && yum -y install wget unzip net-tools sysstat lrzsz && yum clean all
